@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 const colors = document.querySelectorAll('.jsColor');
 const range = document.querySelector('#jsRange');
 const modeBtn = document.querySelector('#jsMode');
+const eraseBtn = document.querySelector('#jsErase');
 const resetBtn = document.querySelector('#jsReset');
 const saveBtn = document.querySelector('#jsSave');
 
@@ -54,24 +55,35 @@ function handleRangeSize(e) {
   ctx.lineWidth = rangeSize;
 }
 
-function handleModeClick() {
-  if (filling) {
-    filling = false;
-    modeBtn.innerText = 'fill';
-  } else {
-    filling = true;
-    modeBtn.innerText = 'paint';
-  }
-}
-
 function handleCanvasClick() {
   if (filling) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 }
 
+function handleModelick() {
+  if (filling) {
+    modeBtn.innerHTML = '<i class="fa-solid fa-fill">';
+    filling = false;
+    ctx.globalCompositeOperation = 'source-over';
+    canvas.style.cursor = "url(' img/paintbrush.png'), pointer";
+  } else {
+    modeBtn.innerHTML = '<i class="fa-solid fa-paintbrush"></i>';
+    filling = true;
+    ctx.globalCompositeOperation = 'source-over';
+    canvas.style.cursor = "url('img/paintbucket.png'), pointer";
+  }
+}
+
+function handleEraseClick() {
+  ctx.globalCompositeOperation = 'destination-out';
+  canvas.style.cursor = "url('img/eraser2.png') 10 10, pointer";
+  filling = false;
+  modeBtn.innerHTML = '<i class="fa-solid fa-fill">';
+}
+
 function handleResetClick() {
-  window.location.reload();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function handleContextMenu(e) {
@@ -102,7 +114,11 @@ if (range) {
 }
 
 if (modeBtn) {
-  modeBtn.addEventListener('click', handleModeClick);
+  modeBtn.addEventListener('click', handleModelick);
+}
+
+if (eraseBtn) {
+  eraseBtn.addEventListener('click', handleEraseClick);
 }
 
 if (resetBtn) {

@@ -16,6 +16,7 @@ body {
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: url('img/paintbrush.png'), pointer;
 }
 
 .controls {
@@ -34,7 +35,7 @@ body {
   cursor: pointer;
   background-color: white;
   padding: 5px 0;
-  width: 80px;
+  width: 50px;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
