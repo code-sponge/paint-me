@@ -6,6 +6,7 @@ const modeBtn = document.querySelector('#jsMode');
 const eraseBtn = document.querySelector('#jsErase');
 const resetBtn = document.querySelector('#jsReset');
 const saveBtn = document.querySelector('#jsSave');
+const rainbow = document.querySelector('.rainbow');
 
 const INITIAL_COLOR = '#2c2c2c';
 
@@ -17,6 +18,7 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
+ctx.lineCap = 'round';
 
 let painting = false;
 let filling = false;
@@ -98,6 +100,20 @@ function handleSaveClick() {
   link.click();
 }
 
+/* rainbow */
+function setRgbColor(rgb) {
+  ctx.strokeStyle = rgb;
+  ctx.fillStyle = rgb;
+}
+
+function rgb() {
+  let randomColor = 'rgb(';
+  for (let i = 0; i < 3; i++) {
+    randomColor += Math.floor(Math.random() * 255) + ',';
+  }
+  return randomColor.replace(/\,$/, ')');
+}
+
 if (canvas) {
   canvas.addEventListener('mousemove', onMouseMove);
   canvas.addEventListener('mousedown', startPainting);
@@ -128,3 +144,7 @@ if (resetBtn) {
 if (saveBtn) {
   saveBtn.addEventListener('click', handleSaveClick);
 }
+
+rainbow.addEventListener('click', () => {
+  setRgbColor(rgb());
+});
