@@ -96,7 +96,7 @@ function handleSaveClick() {
   const image = canvas.toDataURL('image/jpeg');
   const link = document.createElement('a');
   link.href = image;
-  link.download = 'PaintJS🎨';
+  link.download = 'PaintME🎨';
   link.click();
 }
 
